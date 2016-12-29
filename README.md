@@ -17,6 +17,7 @@ and a method **toString** to print out the entire Document.
 ## 2. IMPLEMENTATION
 
 The main method of the server create an instance of **RMIServer** and export it to the RMI runtime.
+
 ```java
 RMIServerIntf engine = new RMIServer();
 RMIServerIntf stub = (RMIServerIntf) UnicastRemoteObject.exportObject(engine, 0);
@@ -60,6 +61,7 @@ remoteCal.addTimestamp(stub);
 
 The server calls the method **addString** of the Document passing the string “Viewed on “+Timestamp as
 parameter. The client executes the method **addString**, appending the string passed as parameter.
+
 ```java
 private static String timeStamps = "";
 
@@ -76,17 +78,22 @@ terminate the session.
 
 The server can be launched through the terminal compiling the jar file in the following way:
 
-**java -Djava.rmi.server.hostname=\<RMIServer-IP> –jar RMIServer.java \<port>**
+```sh
+java -Djava.rmi.server.hostname=<RMIServer-IP> –jar RMIServer.java <port>
+```
 
 The **\<port>** attribute is optional, if not specified, the server creates a RMI registry with the default port
 1099.
 
 On the other hand, the client can be started in this way:
 
-**java -Djava.rmi.server.hostname=\<RMIClient-IP> –jar RMIClient.java \<host> \<port>**
+```sh
+java -Djava.rmi.server.hostname=<RMIClient-IP> –jar RMIClient.java <host> <port>
+```
 
 In this case both the attributes **\<host>** and **\<port>** are optional. If none of them are specified, the client
 tries to locate the registry for the localhost on the default port of 1099.
+
 ```java
  String host = "localhost";
 int port = 1099;
@@ -101,7 +108,9 @@ if (args.length == 1) {
 This Java command line parameter is necessary to override the server address that is passed to the stub
 object, setting the system property java.rmi.server.hostname:
 
-**-Djava.rmi.server.hostname=\<IP>**
+```sh
+-Djava.rmi.server.hostname=<IP>
+```
 
 ## 4. COMMMENTS AND NOTES
 
